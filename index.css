@@ -184,7 +184,7 @@ body {
   );
 }
 
-/* Tekstboksen inni isbjørn-laget */
+/* Tekstboksen inni isbjørn-laget 
 .reveal-text {
   position: relative;
   z-index: 3;
@@ -194,4 +194,3 @@ body {
   padding: 20px 30px;
   border-radius: 8px;
   pointer-events: none; /* Sørger for at masken ikke "hakker" når musen treffer teksten */
-}

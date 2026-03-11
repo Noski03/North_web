@@ -96,3 +96,22 @@ if (maskContainer && maskLayer) {
 
   animate();
 }
+// Hamburgermeny logikk
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("nav-menu");
+const navLinks = document.querySelectorAll(".nav-menu a");
+
+if (hamburger && navMenu) {
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+  });
+
+  // Lukker menyen når man klikker på en lenke (viktig for "smooth scroll")
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      hamburger.classList.remove("active");
+      navMenu.classList.remove("active");
+    });
+  });
+}

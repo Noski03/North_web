@@ -532,3 +532,89 @@ body {
     --ry: 80px !important;
   }
 }
+/* Hamburgermeny-knapp (Skjult som standard) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 6px;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: #0f172a;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Mobil-stiler (Inni @media max-width: 768px) */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex; /* Vis knappen på mobil */
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start utenfor skjermen */
+    width: 80%;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s ease-in-out;
+    z-index: 1050;
+  }
+
+  .nav-menu.active {
+    right: 0; /* Glir inn når den er aktiv */
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .nav-menu ul li {
+    margin: 0;
+  }
+
+  .nav-menu ul li a {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .nav-cta {
+    display: none; /* Skjul den vanlige CTA-knappen i headeren på mobil */
+  }
+
+  .mobile-only {
+    display: block;
+    margin-top: 20px;
+  }
+
+  /* Animasjon når menyen åpnes (X-form) */
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+}
+
+/* Skjul mobil-CTA på desktop */
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none;
+  }
+}

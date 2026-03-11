@@ -102,16 +102,26 @@ const navMenu = document.getElementById("nav-menu");
 const navLinks = document.querySelectorAll(".nav-menu a");
 
 if (hamburger && navMenu) {
+  // Åpne/lukke ved klikk på selve hamburger-ikonet
   hamburger.addEventListener("click", () => {
     hamburger.classList.toggle("active");
     navMenu.classList.toggle("active");
   });
 
-  // Lukker menyen når man klikker på en lenke (viktig for "smooth scroll")
+  // Lukker menyen når man klikker på en lenke
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
       hamburger.classList.remove("active");
       navMenu.classList.remove("active");
     });
+  });
+
+  // NYTT: Lukker menyen hvis man klikker på den tomme plassen (overlay) til venstre
+  navMenu.addEventListener("click", (e) => {
+    // Hvis "target" (det du faktisk traff) er navMenu-containeren og ikke lenkene inni
+    if (e.target === navMenu) {
+      hamburger.classList.remove("active");
+      navMenu.classList.remove("active");
+    }
   });
 }

@@ -41,7 +41,6 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
-  /* Fjernet potensielle overflow-sperrer her */
 }
 
 .navbar .container {
@@ -49,7 +48,7 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  position: relative; /* Lagt til for at barn skal kunne posisjonere seg riktig */
+  position: relative;
 }
 
 .logo {
@@ -59,7 +58,7 @@ body {
   letter-spacing: 1px;
   color: #0f172a;
   text-decoration: none;
-  cursor: pointer; /* Gjør det tydelig at den er klikkbar */
+  cursor: pointer;
 }
 
 .logo-img {
@@ -182,7 +181,6 @@ body {
   align-items: center;
   clip-path: ellipse(0px 0px at 50% 50%);
   z-index: 2;
-  /* Safari-fiks for maske */
   -webkit-clip-path: ellipse(0px 0px at 50% 50%);
 }
 
@@ -477,10 +475,6 @@ body {
 }
 
 /* ==========================================================================
-   10. MEDIA QUERIES (MOBILE FIXES)
-   ========================================================================== */
-
-/* ==========================================================================
    10. RESPONSIVITET (MOBIL & TABLET)
    ========================================================================== */
 
@@ -513,7 +507,6 @@ body {
 
 /* Mobil-tilpasninger (iPhone, etc.) */
 @media (max-width: 768px) {
-  /* 1. Vis hamburger, skjul vanlig CTA */
   .hamburger {
     display: flex;
   }
@@ -522,25 +515,44 @@ body {
     display: none;
   }
 
-  /* 2. Mobilmenyen (Slide-in panel) */
+  /* Mobilmenyen med overlay-støtte */
   .nav-menu {
     position: fixed;
     top: 0;
     right: -100%; /* Starter utenfor skjermen */
-    width: 80%;
+    width: 75%; /* Dekker 75% av skjermen */
     height: 100vh;
     background-color: white;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: 0.4s ease-in-out;
-    z-index: 1050;
+    transition: right 0.4s ease-in-out;
+    z-index: 9999; /* Alltid foran alt på iPhone */
+  }
+
+  /* Den mørke "overlay"-plassen til venstre */
+  .nav-menu::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100vw;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Mørk skygge */
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .nav-menu.active::before {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .nav-menu.active {
-    right: 0; /* Glir inn når vi trykker på hamburger */
+    right: 0;
   }
 
   .nav-menu ul {
@@ -563,7 +575,6 @@ body {
     margin-top: 20px;
   }
 
-  /* 3. Hero & Layout fiks */
   .hero {
     padding: 60px 20px;
   }
@@ -575,7 +586,7 @@ body {
   }
 
   .price-card.featured {
-    transform: scale(1); /* Unngår overlapping på smal skjerm */
+    transform: scale(1);
   }
 
   .about-text h2,
@@ -583,7 +594,6 @@ body {
     font-size: 32px;
   }
 
-  /* 4. Klode-fiks for mobil */
   .reveal-container {
     cursor: default;
   }
@@ -593,7 +603,6 @@ body {
     --ry: 80px !important;
   }
 
-  /* 5. Hamburger-animasjon til X */
   .hamburger.active span:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
   }
@@ -605,7 +614,6 @@ body {
   }
 }
 
-/* Skjul mobil-elementer på desktop */
 @media (min-width: 769px) {
   .mobile-only {
     display: none;

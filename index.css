@@ -477,62 +477,11 @@ body {
    10. MEDIA QUERIES (MOBILE FIXES)
    ========================================================================== */
 
-/* Tablet & Mobile */
-@media (max-width: 992px) {
-  .about-grid,
-  .contact-wrapper {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-}
+/* ==========================================================================
+   10. RESPONSIVITET (MOBIL & TABLET)
+   ========================================================================== */
 
-/* Mobile Specific (iPhone 16 Pro etc) */
-@media (max-width: 768px) {
-  .navbar .nav-menu,
-  .navbar .nav-cta {
-    display: none; /* Skjuler meny på mobil - bør erstattes med en hamburgermeny senere */
-  }
-
-  .hero {
-    padding: 60px 20px;
-  }
-
-  .pricing-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .price-card.featured {
-    transform: scale(1); /* Ingen skalering på mobil for å unngå overlapping */
-  }
-
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .team-grid {
-    grid-template-columns: 1fr; /* Ett teammedlem per rad på mobil */
-  }
-
-  .about-text h2 {
-    font-size: 32px;
-  }
-
-  .contact-info h2 {
-    font-size: 32px;
-  }
-
-  .reveal-container {
-    cursor: default;
-    /* Kloden har allerede max-width: 90vw fra hovedstilen */
-  }
-
-  .mask-layer {
-    /* Sikrer at sirkelen har en grei størrelse på touch */
-    --rx: 80px !important;
-    --ry: 80px !important;
-  }
-}
-/* Hamburgermeny-knapp (Skjult som standard) */
+/* Hamburgermeny-knapp (Skjult på desktop) */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -550,16 +499,31 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Mobil-stiler (Inni @media max-width: 768px) */
+/* Tablet-tilpasninger */
+@media (max-width: 992px) {
+  .about-grid,
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Mobil-tilpasninger (iPhone, etc.) */
 @media (max-width: 768px) {
+  /* 1. Vis hamburger, skjul vanlig CTA */
   .hamburger {
-    display: flex; /* Vis knappen på mobil */
+    display: flex;
   }
 
+  .nav-cta {
+    display: none;
+  }
+
+  /* 2. Mobilmenyen (Slide-in panel) */
   .nav-menu {
     position: fixed;
     top: 0;
-    right: -100%; /* Start utenfor skjermen */
+    right: -100%; /* Starter utenfor skjermen */
     width: 80%;
     height: 100vh;
     background-color: white;
@@ -573,7 +537,7 @@ body {
   }
 
   .nav-menu.active {
-    right: 0; /* Glir inn når den er aktiv */
+    right: 0; /* Glir inn når vi trykker på hamburger */
   }
 
   .nav-menu ul {
@@ -591,16 +555,42 @@ body {
     font-weight: 600;
   }
 
-  .nav-cta {
-    display: none; /* Skjul den vanlige CTA-knappen i headeren på mobil */
-  }
-
   .mobile-only {
     display: block;
     margin-top: 20px;
   }
 
-  /* Animasjon når menyen åpnes (X-form) */
+  /* 3. Hero & Layout fiks */
+  .hero {
+    padding: 60px 20px;
+  }
+
+  .pricing-grid,
+  .portfolio-grid,
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .price-card.featured {
+    transform: scale(1); /* Unngår overlapping på smal skjerm */
+  }
+
+  .about-text h2,
+  .contact-info h2 {
+    font-size: 32px;
+  }
+
+  /* 4. Klode-fiks for mobil */
+  .reveal-container {
+    cursor: default;
+  }
+
+  .mask-layer {
+    --rx: 80px !important;
+    --ry: 80px !important;
+  }
+
+  /* 5. Hamburger-animasjon til X */
   .hamburger.active span:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
   }
@@ -612,7 +602,7 @@ body {
   }
 }
 
-/* Skjul mobil-CTA på desktop */
+/* Skjul mobil-elementer på desktop */
 @media (min-width: 769px) {
   .mobile-only {
     display: none;

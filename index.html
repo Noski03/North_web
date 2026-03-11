@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Northweb</title>
-    <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="icon" type="image/png" href="Northweb_logo_(uten tekst).png" />
     <link rel="stylesheet" href="index.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
@@ -14,25 +14,29 @@
   <body>
     <header class="navbar">
       <div class="container">
-        <div class="logo">
+        <a href="#" class="logo" aria-label="Til toppen">
           <img
             src="Northweb_logo_(uten tekst).png"
             alt="Northweb Logo"
             class="logo-img"
           />
           <span class="logo-text">NORTH<span class="bold">WEB</span></span>
-        </div>
+        </a>
+
         <div class="hamburger" id="hamburger">
           <span></span>
           <span></span>
           <span></span>
         </div>
 
-        <nav class="nav-menu">
+        <nav class="nav-menu" id="nav-menu">
           <ul>
             <li><a href="#tjenester">Tjenester</a></li>
             <li><a href="#prosjekter">Prosjekter</a></li>
             <li><a href="#om-oss">Om oss</a></li>
+            <li class="mobile-only">
+              <a href="#kontakt" class="btn-primary">Start et prosjekt</a>
+            </li>
           </ul>
         </nav>
 

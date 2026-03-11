@@ -41,6 +41,7 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
+  /* Fjernet potensielle overflow-sperrer her */
 }
 
 .navbar .container {
@@ -48,6 +49,7 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  position: relative; /* Lagt til for at barn skal kunne posisjonere seg riktig */
 }
 
 .logo {
@@ -57,6 +59,7 @@ body {
   letter-spacing: 1px;
   color: #0f172a;
   text-decoration: none;
+  cursor: pointer; /* Gjør det tydelig at den er klikkbar */
 }
 
 .logo-img {
@@ -119,11 +122,7 @@ body {
 }
 
 .hero h1 {
-  font-size: clamp(
-    32px,
-    8vw,
-    48px
-  ); /* Skalerer automatisk mellom mobil og desktop */
+  font-size: clamp(32px, 8vw, 48px);
   line-height: 1.2;
   margin-bottom: 20px;
 }
@@ -148,14 +147,14 @@ body {
   position: relative;
   width: 600px;
   height: 600px;
-  max-width: 90vw; /* Kritisk for mobil */
-  max-height: 90vw; /* Kritisk for mobil */
+  max-width: 90vw;
+  max-height: 90vw;
   margin: 0 auto;
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
   cursor: none;
-  touch-action: none; /* Stopper scrolling mens man tar på kloden */
+  touch-action: none;
 }
 
 .base-layer,
@@ -183,12 +182,16 @@ body {
   align-items: center;
   clip-path: ellipse(0px 0px at 50% 50%);
   z-index: 2;
+  /* Safari-fiks for maske */
+  -webkit-clip-path: ellipse(0px 0px at 50% 50%);
 }
 
-/* Bruker CSS-variabler styrt av JS */
 .reveal-container:hover .mask-layer,
 .reveal-container:active .mask-layer {
   clip-path: ellipse(
+    var(--rx, 150px) var(--ry, 150px) at var(--x, 50%) var(--y, 50%)
+  );
+  -webkit-clip-path: ellipse(
     var(--rx, 150px) var(--ry, 150px) at var(--x, 50%) var(--y, 50%)
   );
 }

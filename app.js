@@ -47,14 +47,40 @@ if (maskContainer && maskLayer) {
   animateGlobe();
 }
 
-// 2. HAMBURGERMENY
+// 2. HAMBURGERMENY (Med "klikk utenfor"-funksjon)
 const hamburger = document.getElementById("hamburger");
 const navMenu = document.getElementById("nav-menu");
+const navLinks = document.querySelectorAll(".nav-menu a");
 
 if (hamburger && navMenu) {
-  hamburger.addEventListener("click", () => {
+  // Åpne/Lukke ved klikk på selve hamburgeren
+  hamburger.addEventListener("click", (e) => {
+    e.stopPropagation(); // Hindrer at klikket umiddelbart lukker menyen via document-lytteren
     hamburger.classList.toggle("active");
     navMenu.classList.toggle("active");
+  });
+
+  // LUKK menyen når man klikker på en lenke
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      hamburger.classList.remove("active");
+      navMenu.classList.remove("active");
+    });
+  });
+
+  // LUKK menyen når man klikker et annet sted på siden
+  document.addEventListener("click", (e) => {
+    const isClickInsideMenu = navMenu.contains(e.target);
+    const isClickOnHamburger = hamburger.contains(e.target);
+
+    if (
+      !isClickInsideMenu &&
+      !isClickOnHamburger &&
+      navMenu.classList.contains("active")
+    ) {
+      hamburger.classList.remove("active");
+      navMenu.classList.remove("active");
+    }
   });
 }
 

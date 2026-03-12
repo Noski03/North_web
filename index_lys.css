@@ -9,16 +9,23 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 80px; /* Høyden på navbar */
 }
 
 body {
   font-family: "Inter", sans-serif;
-  color: #ffffff; /* Hvit tekst for mørk modus */
-  background-color: #050a15; /* Mørk navy som base */
+  color: #1a202c; /* Mørk grå tekst (best for lesbarhet på lys bakgrunn) */
+  background-color: #fcfcfc; /* Lys, ren bakgrunn */
+
+  /* Topografisk bakgrunnsbilde */
+  background-image: url("/topographic-contour-lines-map-wavy-pattern-vector-geographic-terrain-shape-background-poster/");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Hindrer horisontal scrolling på mobil */
 }
 
 /* ==========================================================================
@@ -31,9 +38,10 @@ body {
   top: 0;
   left: 0;
   z-index: -1;
-  background-color: #050a15;
+  background-color: #fcfcfc; /* Må matche den nye lyse body-fargen */
 }
 
+/* Sørg for at alle dine eksisterende seksjoner er gjennomsiktige */
 .hero,
 .interactive-globe,
 .pricing,
@@ -42,22 +50,31 @@ body {
   background-color: transparent !important;
 }
 
-/* ==========================================================================
-   FELLES GLASS-STIL (Pakker, Prosjekter, Skjema)
-   ========================================================================== */
 .price-card,
 .project-card,
 .contact-form {
-  background: rgba(255, 255, 255, 0.03) !important; /* Is-aktig glass */
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(56, 189, 248, 0.2) !important; /* Blå kant */
-  color: #ffffff !important;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #1a202c !important;
+
+  /* Mykere skygge (0.1 er ofte perfekt for lys modus) */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  /* Flexbox her tvinger innholdet til å fylle hele kortet */
   display: flex;
   flex-direction: column;
   height: 100%;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.price-card h3,
+.price-card .price,
+.price-card .features li {
+  color: #0f172a !important;
+}
+.price-card .features {
+  flex-grow: 1;
 }
 
 .container {
@@ -75,12 +92,11 @@ body {
    ========================================================================== */
 .navbar {
   height: 80px;
-  background-color: rgba(5, 10, 21, 0.85); /* Mørkt glass i toppen */
-  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.95);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
 }
@@ -98,7 +114,7 @@ body {
   align-items: center;
   font-size: 22px;
   letter-spacing: 1px;
-  color: #ffffff;
+  color: #0f172a;
   text-decoration: none;
   cursor: pointer;
 }
@@ -124,7 +140,7 @@ body {
 
 .nav-menu ul li a {
   text-decoration: none;
-  color: #cbd5e1;
+  color: #475569;
   font-weight: 500;
   transition: color 0.3s ease;
 }
@@ -134,27 +150,26 @@ body {
 }
 
 .btn-primary {
-  background-color: #38bdf8;
-  color: #050a15;
+  background-color: #0f172a;
+  color: white;
   padding: 12px 24px;
   border-radius: 6px;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
   transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-  background-color: #7dd3fc;
+  background-color: #334155;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
 }
 
 /* ==========================================================================
    3. HERO SECTION
    ========================================================================== */
 .hero {
-  min-height: 70vh;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,15 +179,14 @@ body {
 }
 
 .hero h1 {
-  font-size: clamp(32px, 8vw, 64px);
-  line-height: 1.1;
-  margin-bottom: 25px;
-  color: #ffffff;
+  font-size: clamp(32px, 8vw, 48px);
+  line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 .hero p {
   font-size: 18px;
-  color: #94a3b8;
+  color: #64748b;
   max-width: 600px;
 }
 
@@ -183,6 +197,7 @@ body {
   padding: 60px 0;
   display: flex;
   justify-content: center;
+  background-color: #f8fafc;
 }
 
 .reveal-container {
@@ -194,7 +209,7 @@ body {
   margin: 0 auto;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 0 50px rgba(56, 189, 248, 0.15);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
   cursor: none;
   touch-action: none;
 }
@@ -242,6 +257,7 @@ body {
    ========================================================================== */
 .pricing {
   padding: 100px 0;
+  background-color: #ffffff;
 }
 
 .section-header {
@@ -251,7 +267,7 @@ body {
 
 .section-header h2 {
   font-size: 36px;
-  color: #ffffff;
+  color: #0f172a;
   margin-bottom: 15px;
 }
 
@@ -259,23 +275,29 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
+  /* Dette sørger for at alle kortene i samme rad strekker seg like langt */
   align-items: stretch;
 }
 
 .price-card {
+  background: white;
   padding: 40px;
   border-radius: 20px;
+  border: 1px solid #e2e8f0;
   text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .price-card:hover {
   transform: translateY(-10px);
-  border-color: #38bdf8 !important;
-  background: rgba(255, 255, 255, 0.07) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
 }
 
 .price-card.featured {
-  border: 2px solid #38bdf8 !important;
+  border: 2px solid #38bdf8;
+  transform: scale(1.05);
+  z-index: 10;
 }
 
 .popular-tag {
@@ -284,18 +306,18 @@ body {
   left: 50%;
   transform: translateX(-50%);
   background: #38bdf8;
-  color: #050a15;
+  color: white;
   padding: 5px 15px;
   border-radius: 20px;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
 .price {
   font-size: 36px;
   font-weight: 800;
-  color: #ffffff !important;
+  color: #0f172a;
   margin-bottom: 30px;
 }
 
@@ -303,14 +325,12 @@ body {
   list-style: none;
   margin-bottom: 30px;
   text-align: left;
-  flex-grow: 1;
 }
 
 .features li {
   margin-bottom: 12px;
   display: flex;
   align-items: center;
-  color: #cbd5e1 !important;
 }
 
 .features li::before {
@@ -333,7 +353,7 @@ body {
 
 .btn-outline:hover {
   background: #38bdf8;
-  color: #050a15;
+  color: white;
 }
 
 /* ==========================================================================
@@ -341,6 +361,7 @@ body {
    ========================================================================== */
 .portfolio {
   padding: 100px 0;
+  background-color: #ffffff;
 }
 
 .portfolio-grid {
@@ -353,13 +374,11 @@ body {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  height: 350px;
 }
 
 .project-image {
   position: relative;
-  width: 100%;
-  height: 100%;
+  aspect-ratio: 16 / 10;
 }
 
 .project-image img {
@@ -375,8 +394,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(5, 10, 21, 0.8);
-  backdrop-filter: blur(8px);
+  background: rgba(56, 189, 248, 0.15);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -387,32 +406,33 @@ body {
 .project-card:hover .project-overlay {
   opacity: 1;
 }
-
-.project-card:hover .project-image img {
-  transform: scale(1.1);
+/* FIKS FOR HOVER: Istedenfor å bare bli hvit, gjør vi den litt mer solid og løfter den */
+.price-card:hover,
+.project-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: #38bdf8 !important; /* Blå kant ved hover for mer liv */
+  box-shadow: 0 20px 40px rgba(56, 189, 248, 0.2); /* Subtil blåaktig skygge */
 }
-
+/* Sørg for at tekst inni kortet alltid er mørk */
+.price-card h3,
+.price-card .price {
+  color: #0f172a !important;
+}
 .overlay-content {
   text-align: center;
-  color: #ffffff;
-  padding: 20px;
+  color: #0f172a;
 }
 
 .view-project {
   display: inline-block;
   margin-top: 15px;
   padding: 10px 25px;
-  border: 2px solid #38bdf8;
+  border: 2px solid #0f172a;
   text-decoration: none;
-  color: #38bdf8;
+  color: #0f172a;
   font-weight: 700;
   border-radius: 50px;
-  transition: 0.3s;
-}
-
-.view-project:hover {
-  background: #38bdf8;
-  color: #050a15;
 }
 
 /* ==========================================================================
@@ -420,6 +440,7 @@ body {
    ========================================================================== */
 .about {
   padding: 100px 0;
+  background-color: #f8fafc;
 }
 
 .about-grid {
@@ -432,7 +453,6 @@ body {
 .about-text h2 {
   font-size: 42px;
   margin: 20px 0;
-  color: #ffffff;
 }
 
 .stats {
@@ -444,7 +464,6 @@ body {
 .stat-number {
   font-size: 32px;
   font-weight: 800;
-  color: #38bdf8;
   display: block;
 }
 
@@ -459,8 +478,8 @@ body {
   aspect-ratio: 1/1;
   border-radius: 20px;
   overflow: hidden;
-  border: 2px solid rgba(56, 189, 248, 0.3);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 5px solid white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 .member-image img {
@@ -470,10 +489,12 @@ body {
 }
 
 /* ==========================================================================
-   8. CONTACT (KONTAKT) - FIKSET FOR MØRK MODUS
+   8. CONTACT (KONTAKT)
    ========================================================================== */
 .contact {
   padding: 100px 0;
+  background-color: #0f172a;
+  color: white;
 }
 
 .contact-wrapper {
@@ -483,68 +504,52 @@ body {
 }
 
 .contact-form {
-  display: block !important; /* Fixer layout */
+  background: rgba(255, 255, 255, 0.05);
   padding: 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .form-group {
-  margin-bottom: 25px;
-}
-
-.form-group label {
-  display: block;
-  color: #38bdf8;
-  font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 14px;
-  background: rgba(15, 23, 42, 0.9) !important; /* Mørke felt som i bildet */
-  border: 1px solid rgba(56, 189, 248, 0.2) !important;
-  color: white !important;
-  border-radius: 10px;
-  font-size: 16px;
-  transition: 0.3s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #38bdf8 !important;
-  background: rgba(15, 23, 42, 1) !important;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 8px;
 }
 
 .btn-submit {
   width: 100%;
-  padding: 16px;
+  padding: 15px;
   background: #38bdf8;
-  color: #050a15;
   border: none;
-  border-radius: 10px;
-  font-weight: 800;
-  font-size: 16px;
+  border-radius: 8px;
+  font-weight: 700;
   cursor: pointer;
-  text-transform: uppercase;
-  transition: 0.3s;
 }
 
 /* ==========================================================================
    9. FOOTER
    ========================================================================== */
 .footer {
-  padding: 60px 0;
+  padding: 40px 0;
   text-align: center;
-  background-color: #030712;
+  background-color: #0f172a;
   color: #64748b;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* ==========================================================================
-   10. RESPONSIVITET
+   10. RESPONSIVITET (MOBIL & TABLET)
    ========================================================================== */
+
+/* Hamburgermeny-knapp (Skjult på desktop) */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -557,11 +562,12 @@ body {
   display: block;
   width: 30px;
   height: 3px;
-  background-color: #ffffff;
+  background-color: #0f172a;
   border-radius: 3px;
   transition: all 0.3s ease;
 }
 
+/* Tablet-tilpasninger */
 @media (max-width: 992px) {
   .about-grid,
   .contact-wrapper {
@@ -570,28 +576,50 @@ body {
   }
 }
 
+/* Mobil-tilpasninger (iPhone, etc.) */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
   }
+
   .nav-cta {
     display: none;
   }
 
+  /* Mobilmenyen med overlay-støtte */
   .nav-menu {
     position: fixed;
     top: 0;
-    right: -100%;
-    width: 75%;
+    right: -100%; /* Starter utenfor skjermen */
+    width: 75%; /* Dekker 75% av skjermen */
     height: 100vh;
-    background-color: #050a15;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: right 0.4s ease-in-out;
-    z-index: 9999;
+    z-index: 9999; /* Alltid foran alt på iPhone */
+  }
+
+  /* Den mørke "overlay"-plassen til venstre */
+  .nav-menu::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100vw;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Mørk skygge */
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .nav-menu.active::before {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .nav-menu.active {
@@ -604,23 +632,66 @@ body {
     gap: 30px;
   }
 
-  .nav-menu ul li a {
-    font-size: 24px;
-    color: white;
+  .nav-menu ul li {
+    margin: 0;
   }
 
-  .hero h1 {
-    font-size: 38px;
+  .nav-menu ul li a {
+    font-size: 24px;
+    font-weight: 600;
   }
+
+  .mobile-only {
+    display: block;
+    margin-top: 20px;
+  }
+
+  .hero {
+    padding: 60px 20px;
+  }
+
   .pricing-grid,
   .portfolio-grid,
   .team-grid {
     grid-template-columns: 1fr;
   }
+
+  .price-card.featured {
+    transform: scale(1);
+  }
+
+  .about-text h2,
+  .contact-info h2 {
+    font-size: 32px;
+  }
+
+  .reveal-container {
+    cursor: default;
+  }
+
+  .mask-layer {
+    --rx: 80px !important;
+    --ry: 80px !important;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
 }
 
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none;
+  }
+}
 /* ==========================================================================
-   TOPOGRAFISK BAKGRUNN (ANIME STIL)
+   TOPOGRAFISK BAKGRUNN (LANDO STIL)
    ========================================================================== */
 .bg-pattern-container {
   position: fixed;
@@ -629,26 +700,36 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: -1;
-  background-color: #050a15;
+  background-color: #fcfcfc; /* Nesten helt hvit bakgrunn som på bildet */
   overflow: hidden;
   pointer-events: none;
 }
 
 .topographic-svg {
-  width: 150%;
+  width: 150%; /* Gjør den større enn skjermen for å unngå tomrom */
   height: 150%;
   position: absolute;
   top: -25%;
   left: -25%;
-  opacity: 0.15; /* Subtil for mørk modus */
-  animation: drift 60s ease-in-out infinite alternate;
+  opacity: 0.4; /* Juster denne for hvor synlig det skal være */
 }
 
 .topo-line {
   fill: none;
-  stroke: #38bdf8; /* Blå linjer */
+  stroke: #e2e8f0; /* Lys grå farge */
   stroke-width: 1;
-  stroke-dasharray: 4 4;
+  stroke-dasharray: 4 4; /* Gjør linjene små-stiplete som på bildet */
+  vector-effect: non-scaling-stroke; /* Holder linjene tynne uansett skjerm */
+}
+
+.bg-blob {
+  fill: #f1f5f9; /* Litt mørkere hvit/grå for de store formene */
+  opacity: 0.5;
+}
+
+/* Subtil bevegelse (valgfritt) */
+.topographic-svg {
+  animation: drift 60s ease-in-out infinite alternate;
 }
 
 @keyframes drift {

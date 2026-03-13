@@ -74,9 +74,12 @@ body {
 /* ==========================================================================
    2. NAVBAR
    ========================================================================== */
+.mobile-only {
+  display: none;
+} /* Skjult på PC som standard */
 .navbar {
   height: 80px;
-  background-color: rgba(5, 10, 21, 0.85); /* Mørkt glass i toppen */
+  background-color: rgba(5, 10, 21, 0.85);
   backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
@@ -91,9 +94,11 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  position: relative;
 }
-
+.logo,
+.hamburger {
+  z-index: 10001;
+}
 .logo {
   display: flex;
   align-items: center;
@@ -551,7 +556,8 @@ body {
   flex-direction: column;
   cursor: pointer;
   gap: 6px;
-  z-index: 1100;
+  z-index: 10001; /* Høyere enn nav-menu */
+  position: relative;
 }
 
 .hamburger span {
@@ -561,6 +567,22 @@ body {
   background-color: #ffffff;
   border-radius: 3px;
   transition: all 0.3s ease;
+}
+
+/* Animasjon fra Hamburger til X når aktiv */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Skjul mobil-versjonen av knappen på PC */
+.nav-menu ul li.mobile-button {
+  display: none;
 }
 
 @media (max-width: 992px) {
@@ -575,15 +597,23 @@ body {
   .hamburger {
     display: flex;
   }
+
+  /* Skjuler CTA-knappen som ligger i selve baren på mobil */
   .nav-cta {
-    display: none;
+    display: none !important;
+  }
+
+  /* Viser knappen inne i mobilmenyen i stedet */
+  .nav-menu ul li.mobile-button {
+    display: block;
+    margin-top: 20px;
   }
 
   .nav-menu {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 75%;
+    width: 80%;
     height: 100vh;
     background-color: #050a15;
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
@@ -591,8 +621,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: right 0.4s ease-in-out;
-    z-index: 9999;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10000;
   }
 
   .nav-menu.active {
@@ -610,9 +640,17 @@ body {
     color: white;
   }
 
+  /* Gjør knappen inne i menyen fin */
+  .nav-menu ul li.mobile-button a {
+    font-size: 18px;
+    padding: 15px 30px;
+    border-radius: 12px;
+  }
+
   .hero h1 {
     font-size: 38px;
   }
+
   .pricing-grid,
   .portfolio-grid,
   .team-grid {
